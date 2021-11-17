@@ -1,0 +1,11 @@
+/* use thsi file to override css settings */
+.dropdown-hover-all .dropdown-menu, .dropdown-hover > .dropdown-menu.dropend { margin-left:-1px !important }
+
+/* Set a background image by replacing the URL below 
+body {
+    background: url('../images/pexels-arthouse-studio-4344464.jpg') no-repeat center center fixed !important;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+  }*/
