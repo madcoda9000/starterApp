@@ -9,16 +9,22 @@ Please see credits.txt for a list of used libraries in this project.
 
 The main goal of this project is to have a main web application providing the following features:
 
-1. usermanagement
-2. fast frontend using a secure api
-3. easy customizing 
+1. usermanagement (signup, modify, delete)
+2. secure authentication
+3. fast frontend using a secure api
+4. easy customizing (Database, App title, app descrition, frontend)
 
 ### Features
 
 1. secure backend api using jwt and openssl
 2. optional two factor authentication with robthree/twofactorauth
 3. data storage using mysql
-4. nice frontend using bootstrap, jquery, popper.js and jquery-confirm with selectable theme switcher
+4. nice customizeable frontend using bootstrap 5, jquery, popper.js and jquery-confirm with selectable theme switcher
+5. customizeable app title & description using config file
+6. config section for using smtp auth
+7. config section for database settings
+8. config section for application parameters
+
 
 ### Screenshots
 
