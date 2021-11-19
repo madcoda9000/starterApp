@@ -1,3 +1,8 @@
+[![GitHub issues](https://img.shields.io/github/issues/madcoda9000/starterApp?color=blue&style=for-the-badge)](https://github.com/madcoda9000/starterApp/issues)
+[![GitHub stars](https://img.shields.io/github/stars/madcoda9000/starterApp?style=for-the-badge)](https://github.com/madcoda9000/starterApp/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/madcoda9000/starterApp?style=for-the-badge)](https://github.com/madcoda9000/starterApp/network)
+[![GitHub license](https://img.shields.io/github/license/madcoda9000/starterApp?color=blue&style=for-the-badge)](https://github.com/madcoda9000/starterApp/blob/main/LICENSE)
+
 # Starter Application
 
 This is a starter application written in php,css and javascript.
