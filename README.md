@@ -20,5 +20,17 @@ The main goal of this project is to have a main web application providing the fo
 3. data storage using mysql
 4. nice frontend using bootstrap, jquery, popper.js and jquery-confirm with selectable theme switcher
 
+### Screenshots
+
+![Login Page](/Documentation/login.png)
+
+![Login Page](/Documentation/mfa-login.png)
+
+![Login Page](/Documentation/mfa-settings.png)
+
+![Login Page](/Documentation/account-settings.png)
+
+![Login Page](/Documentation/themes.png)
+
 #### License
 This code is published under MIT license. Used libraries in this project might using other licenses. Please take a look at credtits.txt for a overview.
