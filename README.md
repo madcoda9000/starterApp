@@ -25,6 +25,11 @@ The main goal of this project is to have a main web application providing the fo
 7. config section for database settings
 8. config section for application parameters
 
+### Todo's
+- make it possible to host the api on a seperate host
+- implement goups and admin role
+- implement admin interface for manging user accounts
+- implement admin interface for managing groups
 
 ### Screenshots
 
