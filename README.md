@@ -21,5 +21,4 @@ The main goal of this project is to have a main web application providing the fo
 4. nice frontend using bootstrap, jquery, popper.js and jquery-confirm with selectable theme switcher
 
 #### License
-This code is published under MIT license. UIsed libraries in this project might using other licenses. Please take a look at credtits.txt for a overview.
-s
+This code is published under MIT license. Used libraries in this project might using other licenses. Please take a look at credtits.txt for a overview.

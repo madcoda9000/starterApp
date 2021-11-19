@@ -736,7 +736,7 @@ $(document).ready(function(){
         // show login page on error
         .fail(function(result){
             showLoginPage();
-            $('#response').html("<div class='alert alert-info'>Please login to access <b>shPASS</b></div>");
+            $('#response').html("<div class='alert alert-info'>Please login to access this app.</div>");
         });
     }
 

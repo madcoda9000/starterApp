@@ -25,8 +25,8 @@
     $issuer = "http://localhost/shpass/";
 
     // application variables
-    $APP_title = "shPASS";   // your application title
-    $APP_title_description = "your private password manager.";  // your application description
+    $APP_title = "starterAPP";   // your application title
+    $APP_title_description = "customize your starter app.";  // your application description
     $APP_allow_signup = True; // should registering into your app be allowed
     $APP_admin_from_address = "sascha.heimann@gmail.com";
     $APP_admin_to_address = 'sascha.heimann@gmail.com';
