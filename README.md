@@ -10,9 +10,11 @@ Please see credits.txt for a list of used libraries in this project.
 The main goal of this project is to have a main web application providing the following features:
 
 1. usermanagement (signup, modify, delete)
-2. secure authentication
-3. fast frontend using a secure api
-4. easy customizing (Database, App title, app descrition, frontend)
+2. group management
+3. secure authentication
+4. Two factor authentication
+5. fast frontend using a secure api
+6. easy customizing (Database, App title, app description, frontend)
 
 ### Features
 
@@ -26,6 +28,7 @@ The main goal of this project is to have a main web application providing the fo
 8. config section for application parameters
 
 ### Todo's
+
 - make it possible to host the api on a seperate host (configureable api url)
 - implement goups and admin role
 - implement admin interface for manging user accounts
