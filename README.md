@@ -48,4 +48,4 @@ The main goal of this project is to have a main web application providing the fo
 ![Login Page](/Documentation/themes.png)
 
 #### License
-This code is published under MIT license. Used libraries in this project might using other licenses. Please take a look at credtits.txt for a overview.
+This code is published under MIT license. Used libraries in this project might using other licenses. Please take a look at [credits.md](/credits.md) for a overview.
