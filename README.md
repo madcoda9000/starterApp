@@ -40,13 +40,13 @@ The main goal of this project is to have a main web application providing the fo
 
 ![Login Page](/Documentation/login.png)
 
-![Login Page](/Documentation/mfa-login.png)
+![MFA login](/Documentation/mfa-login.png)
 
-![Login Page](/Documentation/mfa-settings.png)
+![MFA settings](/Documentation/mfa-settings.png)
 
-![Login Page](/Documentation/account-settings.png)
+![account settings](/Documentation/account-settings.png)
 
-![Login Page](/Documentation/themes.png)
+![themes](/Documentation/themes.png)
 
 #### License
 This code is published under MIT license. Used libraries in this project might using other licenses. Please take a look at [credits.md](/credits.md) for a overview.
