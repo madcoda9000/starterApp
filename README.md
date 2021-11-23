@@ -39,6 +39,7 @@ The main goal of this project is to have a main web application providing the fo
 - implement goups and admin role
 - implement admin interface for manging user accounts
 - implement admin interface for managing groups
+- implement optional ldap authentication
 - create installation tutorial
 
 ### Screenshots
