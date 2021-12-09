@@ -1,5 +1,4 @@
 // bootstrap 5 submenu functions
-
 (function($bs) {
     const CLASS_NAME = 'has-child-dropdown-show';
     $bs.Dropdown.prototype.toggle = function(_orginal) {
