@@ -33,7 +33,7 @@ $(document).ready(function(){
         setCookie("themePath", themePath, 7);
     }
 
-    // function to change theme             
+    // function to change theme on menu click            
     $('.theme-link').click(function(){
         setTheme($(this).attr('data-theme'), themes[$(this).attr('data-theme')]);                   
     });
