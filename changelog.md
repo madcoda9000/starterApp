@@ -7,17 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [1.0.0] - 2021-06-20
-### Added initial application
+### Added
 - api backend [jwt session security, robthree totp, register user, edit user]
 - bootstrap frontend [bootstrap fronend, bootstrap themes]
 
 ## [1.0.1] - 2021-12-11
-### Added initial application
+### Changed
 - implemented j4mie ORM-Mapper
 - implementd ORM for user creation
 - implemented ORM for user update
 - implemented ORM for user login
 - implemented ORM for TOTP create, update and delete
+### Removed
 - remove old database class references
 - deleted old database class
 - deleted ORM test file
