@@ -9,18 +9,12 @@
     // required to encode json web token
     include_once 'config/core.php';
     include_once 'vendor/autoload.php';
+    include_once 'objects/user.php';
+
     use \Firebase\JWT\JWT;
     
-    // files needed to connect to database
-    include_once 'config/database.php';
-    include_once 'objects/user.php';
-    
-    // get database connection
-    $database = new Database();
-    $db = $database->getConnection();
-    
-    // instantiate user object
-    $user = new User($db);
+   // instantiate user object
+    $user = new User();
     
     // get posted data
     $data = json_decode(file_get_contents("php://input"));

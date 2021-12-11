@@ -9,15 +9,12 @@
  include_once 'config/core.php';
  include_once 'vendor/autoload.php';
  include_once 'objects/Openssl_EncryptDecrypt.php';
+ include_once 'objects/user.php';
 
  use \Firebase\JWT\JWT;
  use RobThree\Auth\TwoFactorAuth;
  
- //files needed to connect to database
- include_once 'config/database.php';
- include_once 'objects/user.php';
-
- // get jwt
+// get jwt
  $jwt=$_POST['jwt'];
 
  if($jwt){

@@ -4,19 +4,15 @@
  header("Access-Control-Allow-Methods: POST");
  header("Access-Control-Max-Age: 3600");
  header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
- 
- // required to encode json web token
+
  include_once 'config/core.php';
  include_once 'vendor/autoload.php';
+ include_once 'objects/user.php';
 
  use \Firebase\JWT\JWT;
  use PHPMailer\PHPMailer\PHPMailer;
  use PHPMailer\PHPMailer\SMTP;
  use PHPMailer\PHPMailer\Exception;
-
- //files needed to connect to database
- include_once 'config/database.php';
- include_once 'objects/user.php';
 
   // get jwt
  $jwt=$_POST['jwt'];

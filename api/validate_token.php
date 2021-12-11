@@ -9,6 +9,7 @@
     // required to decode jwt
     include_once 'config/core.php';
     include_once 'vendor/autoload.php';
+    
     use \Firebase\JWT\JWT;
     
     // get posted data

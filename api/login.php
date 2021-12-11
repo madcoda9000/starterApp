@@ -7,27 +7,21 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     
     // files needed to connect to database
-    include_once 'config/database.php';
+    // include_once 'config/database.php';
     include_once 'objects/user.php';
-    
-    // get database connection
-    $database = new Database();
-    $db = $database->getConnection();
+    include_once 'vendor/autoload.php';
+    include_once 'config/core.php';
+    use \Firebase\JWT\JWT;
     
     // instantiate user object
-    $user = new User($db);
+    $user = new User();
     
     // get posted data
     $data = json_decode(file_get_contents("php://input"));
     
-    // set product property values
+    // set user property values
     $user->email = $data->email;
-    $email_exists = $user->emailExists();
-    
-    // generate json web token
-    include_once 'config/core.php';
-    include_once 'vendor/autoload.php';
-    use \Firebase\JWT\JWT;
+    $email_exists = $user->emailExists();    
     
     // check if email exists and if password is correct
     if($email_exists && password_verify($data->password, $user->password)){

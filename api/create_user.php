@@ -7,15 +7,10 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     
     // files needed to connect to database
-    include_once 'config/database.php';
     include_once 'objects/user.php';
     
-    // get database connection
-    $database = new Database();
-    $db = $database->getConnection();
-    
     // instantiate user object
-    $user = new User($db);
+    $user = new User();
     
     // get posted data
     $data = json_decode(file_get_contents("php://input"));

@@ -1,4 +1,13 @@
 <?php
+ // required to encode json web token
+ include_once 'config/core.php';
+ include_once 'vendor/autoload.php';
+
+ // create orm instance
+ ORM::configure('mysql:host=' . $DB_host . ';dbname='.$DB_name);
+ ORM::configure('username', $DB_user);
+ ORM::configure('password', $DB_pass);
+
 // 'user' object
 class User{
  
@@ -16,48 +25,25 @@ class User{
     public $totp_enabled;
  
     // constructor
-    public function __construct($db){
-        $this->conn = $db;
-    }
-    
+    public function __construct(){
+    }    
     
     // create new user record
     function create(){
-    
-        // insert query
-        $query = "INSERT INTO " . $this->table_name . "
-                SET
-                    firstname = :firstname,
-                    lastname = :lastname,
-                    email = :email,
-                    password = :password,
-                    totp_secret = :totp_secret,
-                    totp_enabled = :totp_enabled";
-    
-        // prepare the query
-        $stmt = $this->conn->prepare($query);
-    
-        // sanitize
-        $this->firstname=htmlspecialchars(strip_tags($this->firstname));
-        $this->lastname=htmlspecialchars(strip_tags($this->lastname));
-        $this->email=htmlspecialchars(strip_tags($this->email));
-        $this->password=htmlspecialchars(strip_tags($this->password));
-        $this->totp_secret=htmlspecialchars(strip_tags(""));
-        $this->totp_enabled=0;
-    
-        // bind the values
-        $stmt->bindParam(':firstname', $this->firstname);
-        $stmt->bindParam(':lastname', $this->lastname);
-        $stmt->bindParam(':email', $this->email);
-        $stmt->bindParam(':totp_secret', $this->totp_secret);
-        $stmt->bindParam(':totp_enabled', $this->totp_enabled);
+
+        $new_user = ORM::for_table('users')->create();
     
         // hash the password before saving to database
         $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
-        $stmt->bindParam(':password', $password_hash);
-    
-        // execute the query, also check if query was successful
-        if($stmt->execute()){
+
+        $new_user->firstname = $this->firstname;
+        $new_user->lastname = $this->lastname;
+        $new_user->email = $this->email;
+        $new_user->totp_secret = $this->totp_secret;
+        $new_user->totp_enabled = $this->totp_enabled;
+        $new_user->password = $password_hash;
+        $new_user->save();
+        if($new_user->id()){
             return true;
         }
     
@@ -66,104 +52,56 @@ class User{
         
     // enable totp for user
     function enable_totp() {
-
-        // update query
-        $query = "UPDATE " . $this->table_name . "
-            SET
-            totp_enabled = :totp_enabled,
-            totp_secret = :totp_secret
-        WHERE id = :id";
-
-        // prepare the query
-        $stmt = $this->conn->prepare($query);
     
         // sanitize
         $this->totp_enabled=htmlspecialchars(strip_tags($this->totp_enabled));
         $this->totp_secret=htmlspecialchars(strip_tags($this->totp_secret));
-    
-        // bind the values from the form
-        $stmt->bindParam(':totp_enabled', $this->totp_enabled);
-        $stmt->bindParam(':totp_secret', $this->totp_secret);
 
-        // unique ID of record to be edited
-        $stmt->bindParam(':id', $this->id);
-
-        // execute the query
-        if($stmt->execute()){
+        $edit_user = ORM::for_table('users')->find_one($this->id);
+        if($edit_user) {
+            $edit_user->totp_enabled = $this->totp_enabled;
+            $edit_user->totp_secret = $this->totp_secret;
+            $edit_user->save();
             return true;
+        } else {
+            return false;
         }
-
-        return false;
     }
 
     // update totp data
     function update_totp() {
-        // update query
-        $query = "UPDATE " . $this->table_name . "
-            SET
-            totp_enabled = :totp_enabled,
-            totp_secret = :totp_secret
-        WHERE id = :id";
-
-        // prepare the query
-        $stmt = $this->conn->prepare($query);
     
         // sanitize
         $this->totp_enabled=htmlspecialchars(strip_tags($this->totp_enabled));
         $this->totp_secret=htmlspecialchars(strip_tags($this->totp_secret));
-    
-        // bind the values from the form
-        $stmt->bindParam(':totp_enabled', $this->totp_enabled);
-        $stmt->bindParam(':totp_secret', $this->totp_secret);
 
-        // unique ID of record to be edited
-        $stmt->bindParam(':id', $this->id);
-
-        // execute the query
-        if($stmt->execute()){
+        $edit_user = ORM::for_table('users')->find_one($this->id);
+        if($edit_user) {
+            $edit_user->totp_enabled = $this->totp_enabled;
+            $edit_user->totp_secret = $this->totp_secret;
+            $edit_user->save();
             return true;
         }
-
-        return false;
+        else {
+            return false;
+        }
     }
 
     // check if given email exist in the database
     function emailExists(){
-    
-        // query to check if email exists
-        $query = "SELECT id, firstname, lastname, password, totp_secret, totp_enabled 
-                FROM " . $this->table_name . "
-                WHERE email = ?
-                LIMIT 0,1";
-    
-        // prepare the query
-        $stmt = $this->conn->prepare( $query );
-    
-        // sanitize
-        $this->email=htmlspecialchars(strip_tags($this->email));
-    
-        // bind given email value
-        $stmt->bindParam(1, $this->email);
-    
-        // execute the query
-        $stmt->execute();
-    
-        // get number of rows
-        $num = $stmt->rowCount();
-    
+
+        $find_user_by_mail = ORM::for_table('users')->where('email', $this->email)->find_one();
+        
         // if email exists, assign values to object properties for easy access and use for php sessions
-        if($num>0){
-    
-            // get record details / values
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($find_user_by_mail){
     
             // assign values to object properties
-            $this->id = $row['id'];
-            $this->firstname = $row['firstname'];
-            $this->lastname = $row['lastname'];
-            $this->password = $row['password'];
-            $this->totp_secret = $row['totp_secret'];
-            $this->totp_enabled = $row['totp_enabled'];
+            $this->id = $find_user_by_mail->id;
+            $this->firstname = $find_user_by_mail->firstname;
+            $this->lastname = $find_user_by_mail->lastname;
+            $this->password = $find_user_by_mail->password;
+            $this->totp_secret = $find_user_by_mail->totp_secret;
+            $this->totp_enabled = $find_user_by_mail->totp_enabled;
     
             // return true because email exists in the database
             return true;
@@ -175,47 +113,35 @@ class User{
  
     // update a user record
     public function update(){
-    
-        // if password needs to be updated
-        $password_set=!empty($this->password) ? ", password = :password" : "";
 
-        // if no posted password, do not update the password
-        $query = "UPDATE " . $this->table_name . "
-                SET
-                    firstname = :firstname,
-                    lastname = :lastname,
-                    email = :email
-                    {$password_set}
-                WHERE id = :id";
-    
-        // prepare the query
-        $stmt = $this->conn->prepare($query);
-    
         // sanitize
         $this->firstname=htmlspecialchars(strip_tags($this->firstname));
         $this->lastname=htmlspecialchars(strip_tags($this->lastname));
         $this->email=htmlspecialchars(strip_tags($this->email));
-    
-        // bind the values from the form
-        $stmt->bindParam(':firstname', $this->firstname);
-        $stmt->bindParam(':lastname', $this->lastname);
-        $stmt->bindParam(':email', $this->email);
-    
-        // hash the password before saving to database
-        if(!empty($this->password)){
+
+        // find the record to update
+        $upd_user = ORM::for_table('users')->find_one($this->id);
+
+        // check if we have to change the password too
+        $changepw = false;
+        if(!empty($this->password)) {
             $this->password=htmlspecialchars(strip_tags($this->password));
-            $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
-            $stmt->bindParam(':password', $password_hash);
+            $this->password = password_hash($this->password, PASSWORD_BCRYPT);
+            $changepw = true;
         }
-    
-        // unique ID of record to be edited
-        $stmt->bindParam(':id', $this->id);
-    
-        // execute the query
-        if($stmt->execute()){
+
+        // try to update the user
+        if($upd_user){
+            $upd_user->firstname = $this->firstname;
+            $upd_user->lastname = $this->lastname;
+            $upd_user->email = $this->email;
+            if($changepw == true) {
+                $upd_user->password = $this->password;
+            }
+            $upd_user->save();
             return true;
+        } else {
+            return false;
         }
-    
-        return false;
     }
 }
