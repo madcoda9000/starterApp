@@ -42,6 +42,9 @@ The main goal of this project is to have a main web application providing the fo
 - implement optional ldap authentication
 - create installation tutorial
 
+### Changelog
+Please view [changelog.md](/changelog.md) for change history.
+
 ### Screenshots
 
 ![Login Page](/Documentation/login.png)
