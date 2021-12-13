@@ -6,6 +6,7 @@ $(document).ready(function(){
      /* For theme switching */
     // array of themes
      var themes = {
+        "undefined": "../assets/bootstrap-5.1.3-dist/css/bootstrap.min.css",
         "default": "assets/bootstrap-5.1.3-dist/css/bootstrap.min.css",
         "flatly" : "assets/css/bs5-themes/flatly.min.css",
         "minco" : "assets/css/bs5-themes/minco.min.css",
@@ -20,9 +21,13 @@ $(document).ready(function(){
 
      // set theme if cookie is found
     var themeName = getCookie("themeName");
-    var themePath = getCookie("themePath");    
+    if(!themeName) {
+        themeName = "default";
+    }
     if (themeName !== undefined) {
-        setTheme(themeName, themePath);
+        setTheme(themeName, themes[themeName]);
+    } else {
+        setTheme("default", themes["default"]);
     }
 
     // function to set theme and save as cookie
@@ -30,7 +35,6 @@ $(document).ready(function(){
         var cssLink = "<link rel='stylesheet' id='btTheme' href='" + themePath + "' />";
         $('#btTheme').replaceWith(cssLink);
         setCookie("themeName", themeName, 7);
-        setCookie("themePath", themePath, 7);
     }
 
     // function to change theme on menu click            
@@ -698,6 +702,44 @@ $(document).ready(function(){
         showLoggedOutMenu();
     }
 
+    // function to check if user is admin
+    function checkForAdmin() {        
+        // validate jwt to verify access
+        var jwtt = getCookie('jwt');
+        $.post("api/validate_token.php", JSON.stringify({ jwt:jwtt })).done(function(result) {
+
+            // submit form data to api
+            $.ajax({
+                url: "api/adm_checkForAdmin.php",
+                type : "POST",
+                data : {jwt: jwtt},
+                success : function(result) {
+                    //alert(result);
+                    if(result=="true") {
+                        $('#admin_menu').css('display', 'block');
+                    } else if(result=="false") {
+                        $('#admin_menu').css('display', 'none');
+                    } else {
+                        $('#response').html("<div class='alert alert-danger'>There was error: <br><br>" + result + "</div>");
+                    }
+                },            
+                // show error message to user
+                error: function(xhr, resp, text){
+                    // on error
+                    $('#admin_menu').css('display', 'none');
+                    $('#response').html("<div class='alert alert-danger'>There was error: <br><br>" + text + "</div>");
+                }
+            });
+
+
+        })
+        // on error
+        .fail(function(result){
+            showLoginPage();
+            $('#response').html("<div class='alert alert-danger'>Please login to access the account page.</div>");
+        });
+    }
+
     //function to delete a cookie
     function deleteCookie(cname) {
         document.cookie = cname + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -776,6 +818,7 @@ $(document).ready(function(){
         $("#sign_up").css('display', 'none');
         $("#account_menu").css('display', 'block');
         $("#logout").css('display', 'block');
+        checkForAdmin();
     }
     
     function showUpdateAccountForm(){

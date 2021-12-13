@@ -37,4 +37,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - set focus to input field in mfa token verification
+- implemented groups table in database
+- implemented groups field in users table
+- implemented admin menu in main menu
+- implemented admin permissions check on login and dynamic admin menu display
+- created groups manage page
 

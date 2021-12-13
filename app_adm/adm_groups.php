@@ -1,5 +1,5 @@
 <?php
-    include_once 'api/config/core.php';
+    include_once '../api/config/core.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -13,11 +13,11 @@
         </title>
  
         <!-- Bootstrap 4 CSS, fontawesome css and custom CSS -->
-        <link rel="stylesheet" href="assets/bootstrap-5.1.3-dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="assets/css/custom.css" />
-        <link rel="stylesheet" id="btTheme" href="assets/bootstrap-5.1.3-dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="assets/boxicons/css/boxicons.min.css" />
-        <link rel="stylesheet" type="text/css" href="assets/js/jquery-confirm-v3.3.4/dist/jquery-confirm.min.css" />
+        <link rel="stylesheet" href="../assets/bootstrap-5.1.3-dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../assets/css/custom.css" />
+        <link rel="stylesheet" id="btTheme" href="../assets/bootstrap-5.1.3-dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../assets/boxicons/css/boxicons.min.css" />
+        <link rel="stylesheet" type="text/css" href="../assets/js/jquery-confirm-v3.3.4/dist/jquery-confirm.min.css" />
     </head>
 <body>
  
@@ -58,8 +58,8 @@
                             <div class="dropdown dropstart">
                                 <a class="dropdown-item dropdown-toggle" href="#" id="admin_menu" role='button' data-bs-toggle='dropdown' aria-expanded="false"><span class="bx bxs-wrench"></span> Admin</a> 
                                 <ul class="dropdown-menu" aria-labelledby="admin_menu">
-                                    <li><a href="app_adm/adm_users.php" class="dropdown-item">Users</a></li>
-                                    <li><a href="app_adm/adm_groups.php" class="dropdown-item">Groups</a></li>
+                                    <li><a href="adm_users.php" class="dropdown-item">Users</a></li>
+                                    <li><a href="adm_groups.php" class="dropdown-item">Groups</a></li>
                                 </ul>
                             </div>
                         </ul>
@@ -94,20 +94,23 @@
                         
                 <!-- where main content will appear -->
                 <div class="display-4" id="headline"></div>
-                <div id="content"></div>  
+                <div id="content">
+
+                
+                </div>  
             </div>
         </div>
     </main>
     <!-- /container -->
  
     <!-- jQuery & Bootstrap 4 JavaScript libraries -->
-    <script src="assets/js/jquery-3.6.0.min/jquery-3.6.0.min.js"></script>
-    <script src="assets/js/popperjs-1.12.min/popperjs-1.12.min.js"></script>
-    <script src="assets/bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery-confirm-v3.3.4/dist/jquery-confirm.min.js"></script>
+    <script src="../assets/js/jquery-3.6.0.min/jquery-3.6.0.min.js"></script>
+    <script src="../assets/js/popperjs-1.12.min/popperjs-1.12.min.js"></script>
+    <script src="../assets/bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
+    <script src="../assets/js/jquery-confirm-v3.3.4/dist/jquery-confirm.min.js"></script>
     <!-- custom javascript functions for index.php -->
-    <script src="assets/js/settings.js"></script>
-    <script src="assets/js/index.js"></script>
+    <script src="../assets/js/settings.js"></script>
+    <script src="../assets/js/adm_groups.js"></script>
 
 </body>
 </html>

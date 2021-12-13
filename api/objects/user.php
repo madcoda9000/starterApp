@@ -42,6 +42,7 @@ class User{
         $new_user->totp_secret = $this->totp_secret;
         $new_user->totp_enabled = $this->totp_enabled;
         $new_user->password = $password_hash;
+        $new_user->group = "users";
         $new_user->save();
         if($new_user->id()){
             return true;
