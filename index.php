@@ -17,7 +17,7 @@
         <link rel="stylesheet" type="text/css" href="assets/css/custom.css" />
         <link rel="stylesheet" id="btTheme" href="assets/bootstrap-5.1.3-dist/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="assets/boxicons/css/boxicons.min.css" />
-        <link rel="stylesheet" type="text/css" href="assets/jquery-confirm-v3.3.4/dist/jquery-confirm.min.css" />
+        <link rel="stylesheet" type="text/css" href="assets/js/jquery-confirm-v3.3.4/dist/jquery-confirm.min.css" />
     </head>
 <body>
  

@@ -242,6 +242,7 @@ $(document).ready(function(){
                         type : "POST",
                         data : {jwt: jwtt, value: $("#totpsecret").text()},
                         success : function(result) {
+                            var t = result;
                             setCookie("mfasec", result, 1);
                         },
                         error: function(xhr, resp, text){
@@ -606,10 +607,11 @@ $(document).ready(function(){
             $('#response').html(msg);
             var html = `
                 <br>
+                <!--  onkeydown="return event.key != 'Enter'; -->
                 <form id='loginmfa_form' method='post' onkeydown="return event.key != 'Enter';">
                     <div class="mb-3">
                         <label id="lblloginmfa" for="token">Please enter your token from your totp app</label>
-                        <input type="text" class="form-control w-25" name="loginmfatoken" id="token" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" maxlength="6" required/>
+                        <input type="text" class="form-control w-25" name="loginmfatoken" id="token" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" maxlength="6" required autofocus />
                     </div>
                     <br>
                     <button type='button' class='btn btn-primary' id='btnloginmfa'>validate code from app...</button>
@@ -638,7 +640,16 @@ $(document).ready(function(){
                 `;
             var content = html + modal;
             $('#headline').html('<h5>MFA-Login required</h5>');
-            $('#content').html(content);            
+            $('#content').html(content);    
+            $('#token').focus(); 
+            
+            $("#token").keyup(function(event) {
+                //alert(event.keyCode);
+                if (event.keyCode === 13) {
+                    alert('goooo');
+                    $("#btnloginmfa").click();
+                }
+            });
         })
         // on error
         .fail(function(result){
