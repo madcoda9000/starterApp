@@ -24,7 +24,7 @@
         $decoded = JWT::decode($jwt, $key, array('HS256'));
         $find_user_by_mail = ORM::for_table('users')->where('email', $decoded->data->email)->find_one();
         if($find_user_by_mail){
-            if($find_user_by_mail->group == "admins") {
+            if($find_user_by_mail->appGroup == "admins") {
                 echo "true";
             } else {
                 echo "false";
