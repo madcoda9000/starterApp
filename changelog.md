@@ -43,3 +43,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - implemented admin permissions check on login and dynamic admin menu display
 - created groups manage page
 
+## [1.0.3] 2021-12-14
+### Added
+- group listing on groups manage page
+- implemented pagination for group listing
+- created non deletable builtin groups (admins and users)
+- created deleteEntryById api call
+- made delete button for group entry functional
+- created default non deleteable admin account with default password
+- set default admin password to: starterAPP.2021
+- implemented gruop deletion incl. checking for group membership
+
+

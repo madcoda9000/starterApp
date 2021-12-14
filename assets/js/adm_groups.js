@@ -85,13 +85,6 @@ $(document).ready(function(){
         // validate jwt to verify access
         var jwt = getCookie('jwt');
         $.post("../api/validate_token.php", JSON.stringify({ jwt:jwt })).done(function(result) {
-
-            // if valid, show homepage
-            var headline = "<h5>You are logged in.</h5>";
-            var html = `<p>You won't be able to access the home and account pages if you are not logged in.</p>`;
-
-            $('#content').html(html);
-            $('#headline').html(headline);
             showLoggedInMenu();           
         })
         // show login page on error
@@ -112,5 +105,92 @@ $(document).ready(function(){
         window.location.href = "../index.php";
     });
 
+    // function to fetch paginated groups data
+    function getPaginatedGroups() {
+        var jwt = getCookie('jwt');
+        $("#target-content").load("../api/adm_groups_pagination.php?page=1&jwt=" + jwt);
+		$(".page-link").click(function(){
+			var id = $(this).attr("data-id");
+			var select_id = $(this).parent().attr("id");
+			$.ajax({
+				url: "../api/adm_groups_pagination.php",
+				type: "GET",
+				data: {
+					page : id,
+                    jwt : jwt
+				},
+				cache: false,
+				success: function(dataResult){
+					$("#target-content").html(dataResult);
+					$(".pageitem").removeClass("active");
+					$("#"+select_id).addClass("active");
+					
+				}
+			});
+		});
+    }    
+
+    // catch delete click
+    $(document).on('click', '.delBtnList', function(){
+        var jwt = getCookie('jwt');
+        var gID = $(this).attr("data-btnDelid");
+        $.confirm({
+            title: 'Confirm group deletion!',
+            content: 'Do you really want to delete this group?',
+            buttons: {
+                delete: {
+                    text: 'Delete!',
+                    btnClass: 'btn-red',
+                    action: function(){
+                        $.ajax({
+                            url: "../api/adm_deleteEntryById.php",
+                            type: "GET",
+                            data: {
+                                id : gID,
+                                jwt : jwt,
+                                table : 'app_groups'
+                            },
+                            cache: false,
+                            success: function(dataResult){
+                                if(dataResult=='success') {
+                                    $.alert({
+                                        title: 'Success!',
+                                        content: 'the group was deleted successfully.',
+                                    });
+                                    showPage();
+                                    getPaginatedGroups();
+                                } else {
+                                    $.alert({
+                                        title: 'Error!',
+                                        content: dataResult,
+                                    });
+                                }
+                            }
+                        });
+                    }
+                },
+                cancel: {
+                    text: 'cancel',
+                    btnClass: 'btn-green',
+                    action: function(){
+
+                    }
+                }
+            }
+        });
+    });
+
+    // catch edit click
+    $(document).on('click', '.editBtnList', function(){
+
+    });
+
     showPage();
+    getPaginatedGroups();
+
+    // var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    // var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    // return new bootstrap.Tooltip(tooltipTriggerEl)
+    // })
+
 });

@@ -1,5 +1,18 @@
 <?php
     include_once '../api/config/core.php';
+    include_once '../api/vendor/autoload.php';
+
+    // create orm instance
+    ORM::configure('mysql:host=' . $DB_host . ';dbname='.$DB_name);
+    ORM::configure('username', $DB_user);
+    ORM::configure('password', $DB_pass);
+    ORM::configure('return_result_sets', true);
+
+    $groupCount = ORM::for_table('app_groups')->count();
+    $limit = 5;  
+    $total_pages = ceil($groupCount / $limit); 
+    echo $groupCount . '<br>';
+    echo $total_pages;
 ?>
 <!doctype html>
 <html lang="en">
@@ -95,7 +108,40 @@
                 <!-- where main content will appear -->
                 <div class="display-4" id="headline"></div>
                 <div id="content">
-
+                <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+						<h2>Manage <b>groups</b></h2>						
+					</div>
+                </div>
+            </div>
+			<div id="target-content">loading...</div>
+            
+			<div class="clearfix">
+               
+					<ul class="pagination">
+                    <?php 
+					if(!empty($total_pages)){
+						for($i=1; $i<=$total_pages; $i++){
+								if($i == 1){
+									?>
+								<li class="pageitem active" id="<?php echo $i;?>"><a href="#" data-id="<?php echo $i;?>" class="page-link" ><?php echo $i;?></a></li>
+															
+								<?php 
+								}
+								else{
+									?>
+								<li class="pageitem" id="<?php echo $i;?>"><a href="#" class="page-link" data-id="<?php echo $i;?>"><?php echo $i;?></a></li>
+								<?php
+								}
+						}
+					}
+								?>
+					</ul>
+               </ul>
+            </div>
+        </div>
                 
                 </div>  
             </div>
