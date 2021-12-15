@@ -38,7 +38,7 @@ The main goal of this project is to have a main web application providing the fo
 - :white_check_mark: [11.12.2021] use j4mie/idiorm ORM class for database actions instead of direct pdo
 - implement goups and admin role
 - implement admin interface for manging user accounts
-- implement admin interface for managing groups
+- :white_check_mark: [15.12.2021] implement admin interface for managing groups
 - implement optional ldap authentication
 - create installation tutorial
 

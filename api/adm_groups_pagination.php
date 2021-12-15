@@ -50,9 +50,6 @@
                                     <!-- Call to action buttons -->
                                     <ul class="list-inline m-0">
                                                 <li class="list-inline-item">
-                                                    <button class="btn btn-success btn-sm rounded-0 editBtnList" type="button" id="btnEd<?php echo $group->id; ?>" data-btnEdid="<?php echo $group->id; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="bx bxs-edit"></i></button>
-                                                </li>
-                                                <li class="list-inline-item">
                                                     <button class="btn btn-danger btn-sm rounded-0 delBtnList" type="button" id="btnDel<?php echo $group->id; ?>" data-btnDelid="<?php echo $group->id; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bx bxs-message-square-x"></i></button>
                                                 </li>
                                             </ul>

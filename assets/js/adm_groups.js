@@ -173,16 +173,70 @@ $(document).ready(function(){
                     text: 'cancel',
                     btnClass: 'btn-green',
                     action: function(){
-
+                        
                     }
                 }
             }
         });
     });
 
-    // catch edit click
-    $(document).on('click', '.editBtnList', function(){
-
+    // catch new group click
+    $(document).on('click', '#btnNewGroup', function(){
+        var jwt = getCookie('jwt');
+        $.confirm({
+            title: false,
+            content: 'url:../templates/adm_addGroup.html',
+            theme: 'bootstrap',
+            type: 'green',
+            buttons: {
+                ok: {
+                    text: 'ok',
+                    btnClass: 'btn-green',
+                    action: function(){
+                        var self = this;
+                        var gName = self.$content.find('input').val(); 
+                        if(!gName) {
+                            $.alert({
+                                title: 'ERROR!',
+                                content: 'you must enter a group name!',
+                            });
+                        } else {
+                            $.ajax({
+                                url: "../api/adm_groups_addGroup.php",
+                                type: "GET",
+                                data: {
+                                    jwt : jwt,
+                                    gName : gName
+                                },
+                                cache: false,
+                                success: function(dataResult){
+                                    if(dataResult=='success') {
+                                        $.alert({
+                                            title: 'Success!',
+                                            content: 'the group was created successfully.',
+                                        });
+                                        showPage();
+                                        getPaginatedGroups();
+                                    } else {
+                                        $.alert({
+                                            title: 'Error!',
+                                            content: dataResult,
+                                        });
+                                    }
+                                }
+                            }); 
+                        }                   
+                    }
+                },
+                cancel: {
+                    text: 'cancel',
+                    btnClass: 'btn-blue',
+                    action: function(){
+                        
+                    }
+                }
+            }
+        });
     });
 
     showPage();

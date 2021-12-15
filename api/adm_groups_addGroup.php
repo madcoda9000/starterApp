@@ -21,29 +21,13 @@
 
  if($jwt){
     try {
-        if(isset($_GET["table"]) && isset($_GET["id"])) {
+        if(isset($_GET["gName"])) {
             // decode jwt
             $decoded = JWT::decode($jwt, $key, array('HS256'));
-            $object = ORM::for_table($_GET["table"])->find_one($_GET["id"]);
-            if($object) {
-                //check for users using the group on group deletion
-                if($_GET["table"] == "app_groups") {
-                    $sql = "SELECT COUNT(id) FROM users WHERE appGroup LIKE '$object->groupName'";
-                    $erg = ORM::for_table('users')->where('appGroup', $object->groupName)->count();
-                    if($erg > 0) {
-                        echo "ERROR: cannot delete group. There are users in this group.";
-                    } elseif($erg == 0) {
-                        $object->delete();
-                        echo "success";
-                    }                   
-                } elseif($_GET["table"] == "users") {
-                    $object->delete();
-                    echo "success";
-                }                
-            }
-            else {
-                echo "ERROR: Object with id ".$_GET["id"]." not found!";
-            }
+            $group = ORM::for_table('app_groups')->create();
+            $group->groupName = $_GET["gName"];
+            $group->save();
+            echo "success";
         }
         else {
             echo "ERROR: Missing Parameters.";

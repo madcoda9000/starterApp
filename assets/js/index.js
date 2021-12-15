@@ -714,12 +714,9 @@ $(document).ready(function(){
                 type : "POST",
                 data : {jwt: jwtt},
                 success : function(result) {
-                    //alert(result);
                     if(result=="true") {
-                        alert(result);
                         $('#admin_menu').css('display', 'block');
                     } else if(result=="false") {
-                        alert(result);
                         $('#admin_menu').css('display', 'none');
                     } else {
                         alert(result);
