@@ -43,9 +43,6 @@
     }
     // show error
     catch (Exception $e){
-        
-        // set response code
-        http_response_code(400);
     
         // show error message
         echo $e->getMessage();

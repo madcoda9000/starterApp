@@ -8,9 +8,9 @@
     ORM::configure('password', $DB_pass);
     ORM::configure('return_result_sets', true);
 
-    $groupCount = ORM::for_table('app_groups')->count();
+    $usersCount = ORM::for_table('users')->count();
     $limit = 5;  
-    $total_pages = ceil($groupCount / $limit); 
+    $total_pages = ceil($usersCount / $limit); 
 ?>
 <!doctype html>
 <html lang="en">
@@ -88,11 +88,8 @@
             <div class="table-title">
                 <div class="row align-items-center">                    
                     <div class="col-3">                    
-						<h2>Manage <b>groups</b></h2>						
+						<h2>Manage <b>users</b></h2>						
 					</div>
-                    <div class="col-1 justify-content-center">
-                        <button class="btn btn-success btn-sm rounded-0"  type="button" id="btnNewGroup" data-bs-toggle="tooltip" data-bs-placement="top" title="New Group"><i class="bx bxs-message-square-add"></i></button>
-                    </div>
                 </div>
             </div>
 			<div id="target-content">loading...</div>
@@ -135,7 +132,7 @@
     <script src="../assets/js/jquery-confirm-v3.3.4/dist/jquery-confirm.min.js"></script>
     <!-- custom javascript functions for index.php -->
     <script src="../assets/js/settings.js"></script>
-    <script src="../assets/js/adm_groups.js"></script>
+    <script src="../assets/js/adm_users.js"></script>
 
 </body>
 </html>

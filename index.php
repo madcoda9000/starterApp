@@ -55,13 +55,13 @@
                                     <li><a href="#" data-theme="wandoo" class="dropdown-item theme-link">Wandoo</a></li>
                                 </ul>
                             </div>
-                            <div class="dropdown dropstart">
-                                <a class="dropdown-item dropdown-toggle" href="#" id="admin_menu" role='button' data-bs-toggle='dropdown' aria-expanded="false"><span class="bx bxs-wrench"></span> Admin</a> 
-                                <ul class="dropdown-menu" aria-labelledby="admin_menu">
-                                    <li><a href="app_adm/adm_users.php" class="dropdown-item">Users</a></li>
-                                    <li><a href="app_adm/adm_groups.php" class="dropdown-item">Groups</a></li>
-                                </ul>
-                            </div>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id='admin_menu' role='button' data-bs-toggle='dropdown' aria-expanded="false"><span class="bx bxs-wrench"></span> Admin</a>
+                        <ul class="dropdown-menu" aria-labelledby="admin_menu">
+                            <li><a href="app_adm/adm_users.php" class="dropdown-item">Users</a></li>
+                            <li><a href="app_adm/adm_groups.php" class="dropdown-item">Groups</a></li>
                         </ul>
                     </li>
                     <li>

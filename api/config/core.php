@@ -27,7 +27,7 @@
     // application variables
     $APP_title = "starterAPP";   // your application title
     $APP_title_description = "customize your starter app.";  // your application description
-    $APP_allow_signup = True; // should registering into your app be allowed
+    $APP_allow_signup = true; // should registering into your app be allowed
     $APP_admin_from_address = "sascha.heimann@gmail.com";
     $APP_admin_to_address = 'sascha.heimann@gmail.com';
 ?>

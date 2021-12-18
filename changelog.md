@@ -6,8 +6,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - host the api on a seperate host (configureable api url)
-- goups and admin role
-- admin interface for manging user accounts
 - optional ldap authentication
 - installation tutorial
 
@@ -54,9 +52,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - implemented gruop deletion incl. checking for group membership
 
 ## [1.0.4] 2021-12-15
-## Added
+### Added
 - api call to add a new group
 - implemented add new feature in group management page
 - group management feature complete
+
+## [1.0.5] 2021-12-18
+### Removed
+- Removed "Accounts" menu from admin pages
+### Fixed
+- Error on signup: wrong group parameter
+### Added
+- added users management page
+- implemented users pagination
+- implemented reset MFA button in user management
+- implemented user delete button in user management
+- implemented api call for user group change
+- implemented user group change button
+- user management feature complete
+
 
 

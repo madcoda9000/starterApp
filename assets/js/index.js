@@ -395,7 +395,6 @@ $(document).ready(function(){
         // get form data
         var sign_up_form=$(this);
         var form_data=JSON.stringify(sign_up_form.serializeObject());
-
         // submit form data to api
         $.ajax({
             url: "api/create_user.php",
@@ -650,7 +649,6 @@ $(document).ready(function(){
             $("#token").keyup(function(event) {
                 //alert(event.keyCode);
                 if (event.keyCode === 13) {
-                    alert('goooo');
                     $("#btnloginmfa").click();
                 }
             });
@@ -760,6 +758,7 @@ $(document).ready(function(){
         $("#sign_up").css('display', 'block');
         $("#logout").css('display', 'none');
         $("#account_menu").css('display', 'none');
+        $("#admin_menu").css('display', 'none');
     }
     
     // show home page

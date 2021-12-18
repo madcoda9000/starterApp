@@ -41,7 +41,7 @@ $(document).ready(function(){
         $("#login").css('display', 'none');
         $("#sign_up").css('display', 'block');
         $("#logout").css('display', 'none');
-        $("#account_menu").css('display', 'none');
+        $("#admin_menu").css('display', 'none');
     }
 
     // if the user is logged in
@@ -49,7 +49,7 @@ $(document).ready(function(){
         // hide login and sign up from navbar & show account & logout button
         $("#login").css('display', 'none');
         $("#sign_up").css('display', 'none');
-        $("#account_menu").css('display', 'block');
+        $("#admin_menu").css('display', 'block');
         $("#logout").css('display', 'block');
     }
 
@@ -241,10 +241,5 @@ $(document).ready(function(){
 
     showPage();
     getPaginatedGroups();
-
-    // var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    // var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    // return new bootstrap.Tooltip(tooltipTriggerEl)
-    // })
 
 });

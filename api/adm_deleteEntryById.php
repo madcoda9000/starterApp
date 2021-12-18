@@ -37,8 +37,13 @@
                         echo "success";
                     }                   
                 } elseif($_GET["table"] == "users") {
-                    $object->delete();
-                    echo "success";
+                    if($object->firstname == "Administrator") {
+                        echo "ERROR: cannot delete builtin admin User.";
+                    } 
+                    else {
+                        $object->delete();
+                        echo "success";
+                    }                    
                 }                
             }
             else {
