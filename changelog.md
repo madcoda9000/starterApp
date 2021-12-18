@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - host the api on a seperate host (configureable api url)
 - optional ldap authentication
+- brute force detection
 - installation tutorial
 
 ## [1.0.0] - 2021-06-20
