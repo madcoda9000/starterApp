@@ -109,7 +109,7 @@ $(document).ready(function(){
    // function to fetch paginated groups data
    function getPaginatedUsers() {
         var jwt = getCookie('jwt');
-        $("#target-content").load("../api/adm_users_pagination.php?page=1&jwt=" + jwt);
+        $("#target-content").load("../api/adm_users_pagination.php?page=1&srchParam=&jwt=" + jwt);
         $(".page-link").click(function(){
             var id = $(this).attr("data-id");
             var select_id = $(this).parent().attr("id");
@@ -118,7 +118,8 @@ $(document).ready(function(){
                 type: "GET",
                 data: {
                     page : id,
-                    jwt : jwt
+                    jwt : jwt,
+                    srchParam : ''
                 },
                 cache: false,
                 success: function(dataResult){
@@ -130,6 +131,12 @@ $(document).ready(function(){
             });
         });
     } 
+
+    // do a user searchj
+    $(document).on('click', '#btnSearch', function(){
+        var jwt = getCookie('jwt');
+        $("#target-content").load("../api/adm_users_pagination.php?page=1&srchParam=" + $('#txtSearch').val() + "&jwt=" + jwt);
+    });
 
     //disable mfa for user
     $(document).on('click', '.mfaBtnList', function(){

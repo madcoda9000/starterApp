@@ -21,11 +21,15 @@
 
  if($jwt){
     try {
-
-        $limit = 5;  
+        $decoded = JWT::decode($jwt, $key, array('HS256'));
         if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };  
-        $start_from = ($page-1) * $limit; 
+        $limit = 5;
+        $start_from = ($page-1) * $limit;           
         $sql = "SELECT * FROM users ORDER BY id ASC LIMIT $start_from, $limit";
+        if($_GET['srchParam']) {
+            $sql = "SELECT * FROM users WHERE CONCAT(firstname,lastname,email) LIKE '%". htmlspecialchars(strip_tags($_GET['srchParam'])) ."%' ORDER BY id ASC LIMIT $start_from, $limit";
+            $limit = 100;
+        }                
         $users = ORM::for_table('app_groups')->raw_query($sql)->order_by_desc('id')->find_many();
 
         ?> <table class="table table-bordered table-striped">  

@@ -69,7 +69,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - implemented reset MFA button in user management
 - implemented user delete button in user management
 - implemented api call for user group change
+- implemented api call for user search
 - implemented user group change button
+- implemented user search field and button in user management
 - user management feature complete
 
 

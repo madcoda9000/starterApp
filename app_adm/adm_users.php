@@ -80,18 +80,25 @@
             <div class="col mx-3  my-3">                      
                 <!-- where prompt / messages will appear -->
                 <div id="response"></div>
-                        
-                <!-- where main content will appear -->
-                <div class="display-4" id="headline"></div>
-                <div id="content">
                 <div class="table-wrapper">
             <div class="table-title">
                 <div class="row align-items-center">                    
                     <div class="col-3">                    
 						<h2>Manage <b>users</b></h2>						
 					</div>
-                </div>
+                </div>                
             </div>
+
+            <div class="row align-items-left">
+                <div class="col-md-4">
+                    <div class="input-group ">
+                        <input type="text" class="form-control" id="txtSearch" placeholder="search..." aria-label="search">
+                        <button class="btn btn-secondary" type="button" id="btnSearch"><i class='bx bx-search-alt-2'></i></button>
+                    </div> 
+                </div>  
+                <br />&nbsp;
+            </div>
+            
 			<div id="target-content">loading...</div>
             
 			<div class="clearfix">
