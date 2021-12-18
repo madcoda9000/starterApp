@@ -57,5 +57,9 @@ Please view [changelog.md](/changelog.md) for change history.
 
 ![themes](/Documentation/themes.png)
 
+![admin users](/Documentation/adm_users.png)
+
+![admin groups](/Documentation/adm_groups.png)
+
 #### License
 This code is published under MIT license. Used libraries in this project might using other licenses. Please take a look at [credits.md](/credits.md) for a overview.
