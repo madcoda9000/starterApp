@@ -81,13 +81,13 @@
                 <!-- where prompt / messages will appear -->
                 <div id="response"></div>
                 <div class="table-wrapper">
-            <div class="table-title">
-                <div class="row align-items-center">                    
-                    <div class="col-3">                    
-						<h2>Manage <b>users</b></h2>						
-					</div>
-                </div>                
-            </div>
+                    <div class="table-title">
+                        <div class="row align-items-center">                    
+                            <div class="col-3">                    
+                                <h2>Manage <b>users</b></h2>						
+                            </div>
+                        </div>                
+                    </div>
 
             <div class="row align-items-left">
                 <div class="col-md-4">

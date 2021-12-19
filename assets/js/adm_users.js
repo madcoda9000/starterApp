@@ -288,6 +288,63 @@ $(document).ready(function(){
         });
     });
 
+    // disable or enable a user
+    $(document).on('click', '.stateBtnList', function(){
+        var uAccState = $(this).attr("data-userEnabled");
+        var uID = $(this).attr("data-btnuID");
+        var jwt = getCookie('jwt');
+        $.post("../api/validate_token.php", JSON.stringify({ jwt:jwt })).done(function(result) {
+            var uStateAction = '';
+            var confMsg = '';
+            if(uAccState==0) {uStateAction='enable'} else {uStateAction='disable'}     
+            confMsg="Do you really want to " + uStateAction + " this user?";
+
+            $.confirm({
+                title: uStateAction + ' user',
+                content: confMsg,
+                buttons: {
+                    Yes: {
+                        btnClass: 'btn-secondary',
+                        action: function () {
+                            $.ajax({
+                                url: "../api/adm_changeUserState.php",
+                                type: "GET",
+                                data: {
+                                    jwt : jwt,
+                                    uID : uID,
+                                    action : uStateAction
+                                },
+                                cache: false,
+                                success: function(dataResult){
+                                    if(dataResult=='success') {
+                                        showPage();
+                                        getPaginatedUsers();
+                                    } else {
+                                        $.alert({
+                                            title: 'Error!',
+                                            content: dataResult,
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    },
+                    cancel: {
+                        btnClass: 'btn-primary',
+                        action: function () {
+    
+                        }
+                    }
+                }
+            })
+        })
+        // show login page on error
+        .fail(function(result){
+            setCookie("jwt", "", 1);
+            window.location.replace("../index.php");
+        });
+    });
+
     showPage();
     getPaginatedUsers();
 });

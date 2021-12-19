@@ -63,6 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed "Accounts" menu from admin pages
 ### Fixed
 - Error on signup: wrong group parameter
+- Error in MFA reset for other user as logged on admin
 ### Added
 - added users management page
 - implemented users pagination
@@ -74,9 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - implemented user search field and button in user management
 - user management feature complete
 
-## [1.0.6] 2021-12-19
-### Fixed
-- Error in MFA reset for other user as logged on admin
+## [1.0.5] 2021-12-19
 ### Added
 - Toast notofication on admin user login if mfa is not activated
 - accState field in users Table
@@ -87,6 +86,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - modified api call for toke verification. Implement check if user is getting disabled in the meantime
 - modified login page to notify user if account is disabled
 - implemented api call for changing user state
+- implemented enabole/disable button for user in user management
 
 
 

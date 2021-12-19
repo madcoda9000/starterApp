@@ -9,3 +9,8 @@ body {
     background-size: cover;
     -o-background-size: cover;
   }*/
+
+  /* table cell flashing*/
+  .invalid {
+    background-color: #f8223b1e !important;
+}

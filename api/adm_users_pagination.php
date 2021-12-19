@@ -49,7 +49,17 @@
         <?php  
         foreach ($users as $user) {  
         ?>  
-                    <tr>  
+                    <?php
+                        if($user->totp_enabled==0 && $user->appGroup=="admins") {
+                            ?>
+                            <tr class="invalid" style="background-color:inherit;"> 
+                            <?php
+                        } else {
+                            ?>
+                            <tr>
+                            <?php
+                        }
+                    ?>                     
                     <td><?php echo $user->id; ?></td>  
                     <td><?php echo $user->firstname; ?></td> 
                     <td><?php echo $user->lastname; ?></td> 
@@ -65,7 +75,7 @@
                                 <?php
                                 } elseif ($user->totp_enabled == 0) {
                                 ?>
-                                    <img src="../assets/images/shield_off.png" style="width: 24px; height:24px;" alte="MFA disabled" data-bs-toggle="tooltip" data-bs-placement="top" title="MFA is deactivated" />
+                                    <img src="../assets/images/shield_off.png" style="width: 24px; height:24px;" alt="MFA disabled" data-bs-toggle="tooltip" data-bs-placement="top" title="MFA is deactivated" />
                                 <?php
                                 }
                                 ?> 
@@ -74,16 +84,16 @@
                     </td> 
                     <td>
                         <?php
-                            if($user->accState==1) {
+                            if($user->accState==1&&$user->firstname!="Administrator") {
                                 ?>                                
                                 <li class="list-inline-item">
-                                    <button class="btn btn-success btn-sm rounded-2 stateBtnList" type="button" id="btnState<?php echo $user->id; ?>" data-btnuID="<?php echo $user->id; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="deactivate use"><i class="bx bx-user"></i></button>
+                                    <button class="btn btn-success btn-sm rounded-2 stateBtnList" type="button" id="btnState<?php echo $user->id; ?>" data-userEnabled="<?php echo $user->accState; ?>" data-btnuID="<?php echo $user->id; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="deactivate use"><i class="bx bx-user"></i></button>
                                 </li>
                                 <?php
-                            } elseif($user->accState==0) {
+                            } elseif($user->accState==0&&$user->firstname!="Administrator") {
                                 ?>
                                 <li class="list-inline-item ">
-                                    <button class="btn btn-dark btn-sm rounded-2 stateBtnList" type="button" id="btnState<?php echo $user->id; ?>" data-btnuID="<?php echo $user->id; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="activate use"><i class="bx bx-user"></i></button>
+                                    <button class="btn btn-dark btn-sm rounded-2 stateBtnList" type="button" id="btnState<?php echo $user->id; ?>" data-userEnabled="<?php echo $user->accState; ?>" data-btnuID="<?php echo $user->id; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="activate use"><i class="bx bx-user"></i></button>
                                 </li>
                                 <?php
                             }
