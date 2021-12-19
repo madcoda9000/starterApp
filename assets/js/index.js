@@ -704,7 +704,7 @@ $(document).ready(function(){
     function checkForAdmin() {        
         // validate jwt to verify access
         var jwtt = getCookie('jwt');
-        $.post("api/validate_token.php", JSON.stringify({ jwt:jwtt })).done(function(result) {
+        $.post("api/validate_token.php", JSON.stringify({ jwt:jwtt })).done(function(res) {
 
             // submit form data to api
             $.ajax({
@@ -714,6 +714,10 @@ $(document).ready(function(){
                 success : function(result) {
                     if(result=="true") {
                         $('#admin_menu').css('display', 'block');
+                        if(res.data.totp_enabled==0) {
+                            $("#liveToast").toast({ delay: 10000 });
+                            $("#liveToast").toast("show");
+                        }                        
                     } else if(result=="false") {
                         $('#admin_menu').css('display', 'none');
                     } else {
@@ -883,4 +887,5 @@ $(document).ready(function(){
         });
         return o;
     };
+    
 });

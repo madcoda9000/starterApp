@@ -74,9 +74,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - implemented user search field and button in user management
 - user management feature complete
 
-## [1.0.5] 2021-12-19
+## [1.0.6] 2021-12-19
 ### Fixed
 - Error in MFA reset for other user as logged on admin
+### Added
+- Toast notofication on admin user login if mfa is not activated
 
 
 

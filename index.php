@@ -99,6 +99,22 @@
         </div>
     </main>
     <!-- /container -->
+
+    <!-- Toast message -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="liveToast" class="toast hide text-white bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header text-white bg-danger">
+        <img src="assets/images/warning.png" class="rounded me-2" alt="...">
+        <strong class="me-auto">WARNING</strong>
+        <small>enable MFA</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            It is strongly recommended to activate MFA for admin accounts!
+        </div>
+    </div>
+    </div>
+    <!-- /Tost message -->
  
     <!-- jQuery & Bootstrap 4 JavaScript libraries -->
     <script src="assets/js/jquery-3.6.0.min/jquery-3.6.0.min.js"></script>
