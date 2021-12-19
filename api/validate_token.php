@@ -11,6 +11,11 @@
     include_once 'vendor/autoload.php';
     
     use \Firebase\JWT\JWT;
+    // create orm instance
+    ORM::configure('mysql:host=' . $DB_host . ';dbname='.$DB_name);
+    ORM::configure('username', $DB_user);
+    ORM::configure('password', $DB_pass);
+    ORM::configure('return_result_sets', true);
     
     // get posted data
     $data = json_decode(file_get_contents("php://input"));
@@ -25,16 +30,29 @@
         try {
             // decode jwt
             $decoded = JWT::decode($jwt, $key, array('HS256'));
-    
-            // set response code
-            http_response_code(200);
-    
-            // show user details
-            echo json_encode(array(
-                "message" => "Access granted.",
-                "data" => $decoded->data
-            ));
-    
+            $uID = $decoded->data->id;            
+
+            // check if user is disabled in the meantime
+            $user = ORM::for_table('users')->find_one($uID);
+            if($user->accState==0) {
+                // set response code
+                http_response_code(401);
+            
+                // tell the user access denied  & show error message
+                echo json_encode(array(
+                    "message" => "User account deactivated!",
+                    "error" => $e->getMessage()
+                ));
+            } else {
+                // set response code
+                http_response_code(200);
+        
+                // show user details
+                echo json_encode(array(
+                    "message" => "Access granted.",
+                    "data" => $decoded->data
+                ));
+            }    
         }
     
         // if decode fails, it means jwt is invalid

@@ -23,6 +23,7 @@ class User{
     public $password;
     public $totp_secret;
     public $totp_enabled;
+    public $accState;
  
     // constructor
     public function __construct(){
@@ -43,6 +44,7 @@ class User{
         $new_user->totp_enabled = $this->totp_enabled;
         $new_user->password = $password_hash;
         $new_user->appGroup = "users";
+        $new_user->accState = 1;
         try {
         $new_user->save();
         if($new_user->id()){
@@ -53,6 +55,31 @@ class User{
             return false;
         }         
     }
+
+    // disable user
+    function disable_user() {
+        $edit_user = ORM::for_table('users')->find_one($this->id);
+        if($edit_user) {
+            $edit_user->accState = 0;
+            $edit_user->save();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // enable user
+    function enable_user() {
+        $edit_user = ORM::for_table('users')->find_one($this->id);
+        if($edit_user) {
+            $edit_user->accState = 1;
+            $edit_user->save();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
         
     // enable totp for user
     function enable_totp() {
@@ -106,6 +133,7 @@ class User{
             $this->password = $find_user_by_mail->password;
             $this->totp_secret = $find_user_by_mail->totp_secret;
             $this->totp_enabled = $find_user_by_mail->totp_enabled;
+            $this->accState = $find_user_by_mail->accState;
     
             // return true because email exists in the database
             return true;

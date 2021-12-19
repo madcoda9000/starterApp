@@ -22,6 +22,7 @@
     $user->password = $data->password;
     $user->totp_enabled = 0;
     $user->totp_secret = "";
+    $user->accState = 1;
     
     // create the user
     if(

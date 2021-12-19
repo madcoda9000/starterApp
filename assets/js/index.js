@@ -434,21 +434,25 @@ $(document).ready(function(){
             contentType : 'application/json',
             data : form_data,
             success : function(result){  
-                
-
-                // check if mfa is enabled
-                if(result.mfa == 1) {
-                    // store jwt to cookie
-                    setCookie("jwt", result.jwt, 1);
-                    // show mfa verification                    
-                    showMFALogonDialog();
+                // check if user is disabled
+                if(result.accState==0) {
+                    $('#response').html("<div class='alert alert-danger'>Login failed. Your account is currently disabled! Please contact your administrator.</div>");
+                    login_form.find('input').val(''); 
                 } else {
-                    // store jwt to cookie
-                    setCookie("jwt", result.jwt, 1);
-                    // show home page & tell the user it was a successful login
-                    showHomePage();
-                    $('#response').html("<div class='alert alert-success'>Successful login.</div>");                    
-                }       
+                    // check if mfa is enabled
+                    if(result.mfa == 1) {
+                        // store jwt to cookie
+                        setCookie("jwt", result.jwt, 1);
+                        // show mfa verification                    
+                        showMFALogonDialog();
+                    } else {
+                        // store jwt to cookie
+                        setCookie("jwt", result.jwt, 1);
+                        // show home page & tell the user it was a successful login
+                        showHomePage();
+                        $('#response').html("<div class='alert alert-success'>Successful login.</div>");                    
+                    } 
+                }                      
             },
             error: function(xhr, resp, text){
                 // on error, tell the user login has failed & empty the input boxes

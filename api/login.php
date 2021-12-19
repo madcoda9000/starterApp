@@ -36,7 +36,8 @@
                 "lastname" => $user->lastname,
                 "email" => $user->email,
                 "totp_secret" => $user->totp_secret,
-                "totp_enabled" => $user->totp_enabled
+                "totp_enabled" => $user->totp_enabled,
+                "accState" => $user->accState
             )
         );
 
@@ -44,6 +45,12 @@
         $mfa = 0;
         if($user->totp_enabled == "1") {
             $mfa = 1;
+        }
+
+        // check if user is disabled
+        $accState = 0;
+        if($user->accState==1) {
+            $accState = 1;
         }
     
         // set response code
@@ -55,7 +62,8 @@
                 array(
                     "message" => "Successful login.",
                     "jwt" => $jwt,
-                    "mfa" => $mfa
+                    "mfa" => $mfa,
+                    "accState" => $accState
                 )
             );
     

@@ -35,13 +35,14 @@
         ?> <table class="table table-bordered table-striped">  
         <thead>  
         <tr>  
-        <th style="width: 5%">ID</th>  
-        <th style="width: 10%">firstname</th>  
-        <th style="width: 10%">lastname</th>  
-        <th style="width: 30%">email</th> 
+        <th style="width: 3%">ID</th>  
+        <th style="width: 10%">Firstname</th>  
+        <th style="width: 10%">Lastname</th>  
+        <th style="width: 30%">Email</th> 
         <th style="width: 10%">Group</th> 
-        <th style="width: 5%">MFA</th> 
-        <th style="width: 15%">actions</th> 
+        <th style="width: 3%">MFA</th> 
+        <th style="width: 3%">Status</th> 
+        <th style="width: 15%">Actions</th> 
         </tr>  
         </thead>  
         <tbody>  
@@ -60,17 +61,34 @@
                                 <?php 
                                 if($user->totp_enabled == 1) {
                                 ?>
-                                    <button class="btn btn-info btn-sm rounded-2" type="button" ><i class="bx bx-check-double"></i></button>
+                                    <img src="../assets/images/shield_on.png" style="width: 24px; height:24px;" alt="MFA activated" data-bs-toggle="tooltip" data-bs-placement="top" title="MFA is activated" />
                                 <?php
                                 } elseif ($user->totp_enabled == 0) {
                                 ?>
-                                    <button class="btn btn-secondary btn-sm rounded-2" type="button" ><i class="bx bx-check"></i></button>
+                                    <img src="../assets/images/shield_off.png" style="width: 24px; height:24px;" alte="MFA disabled" data-bs-toggle="tooltip" data-bs-placement="top" title="MFA is deactivated" />
                                 <?php
                                 }
                                 ?> 
                             </li>
                         </ul>                   
                     </td> 
+                    <td>
+                        <?php
+                            if($user->accState==1) {
+                                ?>                                
+                                <li class="list-inline-item">
+                                    <button class="btn btn-success btn-sm rounded-2 stateBtnList" type="button" id="btnState<?php echo $user->id; ?>" data-btnuID="<?php echo $user->id; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="deactivate use"><i class="bx bx-user"></i></button>
+                                </li>
+                                <?php
+                            } elseif($user->accState==0) {
+                                ?>
+                                <li class="list-inline-item ">
+                                    <button class="btn btn-dark btn-sm rounded-2 stateBtnList" type="button" id="btnState<?php echo $user->id; ?>" data-btnuID="<?php echo $user->id; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="activate use"><i class="bx bx-user"></i></button>
+                                </li>
+                                <?php
+                            }
+                        ?>
+                    </td>
                     <td>
                         <?php
                             if($user->firstname != 'Administrator') {

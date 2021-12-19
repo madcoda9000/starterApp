@@ -39,6 +39,7 @@
             $user->id = $decoded->data->id;
             $user->totp_secret = $decoded->data->totp_secret;
             $user->totp_enabled = $decoded->data->totp_enabled;
+            $user->accState = $decoded->data->accState;
     
             // update the user record
             if($user->update()){
@@ -53,7 +54,8 @@
                         "lastname" => $user->lastname,
                         "email" => $user->email,
                         "totp_secret" => $user->totp_secret,
-                        "totp_enabled" => $user->totp_enabled
+                        "totp_enabled" => $user->totp_enabled,
+                        "accSate" => $user->accState
                     )
                 );
                 $jwt = JWT::encode($token, $key);

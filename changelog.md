@@ -79,6 +79,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Error in MFA reset for other user as logged on admin
 ### Added
 - Toast notofication on admin user login if mfa is not activated
+- accState field in users Table
+- added enable / disable user functions in user class
+- modified create / update user api calls to reflect column changes
+- added active/inactive account status indicator in user management
+- added active/inactive MFA indicator in user management
+- modified api call for toke verification. Implement check if user is getting disabled in the meantime
+- modified login page to notify user if account is disabled
+- implemented api call for changing user state
 
 
 
