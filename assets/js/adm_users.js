@@ -142,6 +142,7 @@ $(document).ready(function(){
     $(document).on('click', '.mfaBtnList', function(){
         var jwt = getCookie('jwt');
         var uID = $(this).attr("data-btnMfaid");
+        alert(uID);
         $.confirm({
             title: 'MFA reset',
             content: 'Do you really want to reset MFA for this user?',
@@ -153,7 +154,8 @@ $(document).ready(function(){
                             url: "../api/totp_disable_mfa.php",
                             type: "POST",
                             data: {
-                                jwt : jwt
+                                jwt : jwt,
+                                uID : uID
                             },
                             cache: false,
                             success: function(dataResult){

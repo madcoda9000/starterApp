@@ -24,8 +24,12 @@
 
         // decode jwt
         $decoded = JWT::decode($jwt, $key, array('HS256'));
-
         $user->id = $decoded->data->id;
+
+        if(isset($_POST['uID'])) {
+            $user->id = $_POST['uID'];
+        }
+        
         $user->totp_secret = "";
         $user->totp_enabled = 0;
 
