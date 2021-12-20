@@ -17,6 +17,7 @@
     $MAIL_User = "sascha.heimann@gmail.com";
     $MAIL_Pass = "lfllzcjmtmungdxg";
     $MAIL_Encryption = "PHPMailer::ENCRYPTION_STARTTLS"; //possible values are: PHPMailer::ENCRYPTION_STARTTLS (STARTTLS) or PHPMailer::ENCRYPTION_SMTPS (SSL)
+    $MAIL_useSmtpAuth = true;
 
     // variables used for jwt
     $key = "lkjh23409ufvcwne05tu902344u9r78dft8347g94hzt03485g6h374057bß3476bvß34907634b0ß987";

@@ -9,6 +9,7 @@
     // files needed to connect to database
     // include_once 'config/database.php';
     include_once 'objects/user.php';
+    include_once 'objects/mail.php';
     include_once 'vendor/autoload.php';
     include_once 'config/core.php';
     use \Firebase\JWT\JWT;
@@ -54,11 +55,26 @@
         $edit_user->accState = 0;
         $edit_user->save();
 
-        // set response code
-        http_response_code(401);
-        
-        // tell the user login failed because password was wrong
-        echo json_encode(array("message" => "Too many failed logins. Your account is disabled! Please contact your adminstrator"));
+        // check if we have to notfy the administrator
+        if($APP_lockOutMail==true) {
+            $m = new mail($MAIL_Server, $MAIL_Port, $MAIL_User, $MAIL_Pass, $MAIL_Encryption, $APP_admin_from_address, $APP_admin_to_address, $MAIL_useSmtpAuth);
+            $m->t_subject = "Failed logon attempts exceeded..";
+            $m->t_body = "WARNING: The user account ". $edit_user->email . " has been disabled due too many failed logons.";
+            $res = $m->sendAdminMail();
+            if($res!="success") {
+                // set response code
+                http_response_code(401);
+                
+                // tell the user login failed because password was wrong
+                echo json_encode(array("message" => "Too many failed logins. Your account is disabled! Your administrator could not be notified! Please contact your administrator.<br><br>Error: ".$res));
+            } else {
+                // set response code
+                http_response_code(401);
+                
+                // tell the user login failed because password was wrong
+                echo json_encode(array("message" => "Too many failed logins. Your account is disabled! Your administrator was informed about that."));
+            }
+        }        
     } 
 
     // on wrong login credentials update failed logon count
