@@ -1,6 +1,6 @@
 <?php
     // required headers
-    header("Access-Control-Allow-Origin: http://localhost/rest-api-authentication-example/");
+    header("Access-Control-Allow-Origin: *");
     header("Content-Type: application/json; charset=UTF-8");
     header("Access-Control-Allow-Methods: POST");
     header("Access-Control-Max-Age: 3600");
@@ -12,6 +12,10 @@
     include_once 'vendor/autoload.php';
     include_once 'config/core.php';
     use \Firebase\JWT\JWT;
+    // create orm instance
+    ORM::configure('mysql:host=' . $DB_host . ';dbname='.$DB_name);
+    ORM::configure('username', $DB_user);
+    ORM::configure('password', $DB_pass);
     
     // instantiate user object
     $user = new User();
@@ -22,9 +26,66 @@
     // set user property values
     $user->email = $data->email;
     $email_exists = $user->emailExists();    
+    $passVerify = password_verify($data->password, $user->password);
+
+    try {
+    
+    if ($email_exists == false) {
+        // set response code
+        http_response_code(401);
+        
+        // tell the user login failed because user was not found
+        echo json_encode(array("message" => "User not found."));  
+    } 
+
+    // check if user is disabled already
+    elseif($email_exists == true && $user->accState==0) {
+        // set response code
+        http_response_code(401);
+        
+        // tell the user login failed because user was not found
+        echo json_encode(array("message" => "Too many failed logins. Your account is disabled! Please contact your adminstrator")); 
+    }
+
+    // check if failed logon count is exceeded
+    elseif($email_exists == true && $user->failedLogonCount >= $APP_failedLogonCount && $user->accState==1) {
+        // we have to disable this user
+        $edit_user = ORM::for_table('users')->find_one($user->id);
+        $edit_user->accState = 0;
+        $edit_user->save();
+
+        // set response code
+        http_response_code(401);
+        
+        // tell the user login failed because password was wrong
+        echo json_encode(array("message" => "Too many failed logins. Your account is disabled! Please contact your adminstrator"));
+    } 
+
+    // on wrong login credentials update failed logon count
+    elseif($email_exists == true && $passVerify == false) {
+        $edit_user = ORM::for_table('users')->find_one($user->id);
+        if($edit_user) {
+            $edit_user->failedLogonCount = $edit_user->failedLogonCount + 1;
+            $edit_user->save();
+            // set response code
+            http_response_code(401);
+        
+            // tell the user login failed because password was wrong
+            echo json_encode(array("message" => "Wrong password!"));
+        } else {
+            // set response code
+            http_response_code(401);
+            
+            // tell the user login failed because user was not found
+            echo json_encode(array("message" => "User not found."));
+        } 
+    } 
     
     // check if email exists and if password is correct
-    if($email_exists && password_verify($data->password, $user->password)){
+    elseif($email_exists && password_verify($data->password, $user->password)){
+
+        // if login was successful reset failed login count
+        $user->resetFailedLogonCount();
     
         $token = array(
             "iat" => $issued_at,
@@ -67,8 +128,7 @@
                 )
             );
     
-    }
-    
+    }    
     // login failed
     else{
     
@@ -78,4 +138,12 @@
         // tell the user login failed
         echo json_encode(array("message" => "Login failed."));
     }
+}
+catch (Exception $e) {
+    // set response code
+    http_response_code(401);
+    
+    // tell the user login failed
+    echo json_encode(array("message" => $e->getMessage()));
+}
 ?>

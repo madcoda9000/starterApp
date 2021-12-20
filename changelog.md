@@ -86,7 +86,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - modified api call for toke verification. Implement check if user is getting disabled in the meantime
 - modified login page to notify user if account is disabled
 - implemented api call for changing user state
-- implemented enabole/disable button for user in user management
+- implemented enable/disable button for user in user management
+- added failedLogon column in users table
+- added application variable for failed login attempts max count
+- added application variable for admin notification on user lock out due to failed logins 
+
+## [1.0.5] 2021-12-20
+### Added
+- modified logon api to reflect brute force settings
+- brute force feature complete
 
 
 

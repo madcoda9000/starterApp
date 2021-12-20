@@ -40,7 +40,7 @@ The main goal of this project is to have a main web application providing the fo
 - :white_check_mark: [18.12.2021] implement admin interface for manging user accounts
 - :white_check_mark: [15.12.2021] implement admin interface for managing groups
 - implement optional ldap authentication
-- implement brute force detection
+- :white_check_mark: [20.12.2021] implement brute force detection
 - create installation tutorial
 
 ### Changelog

@@ -30,4 +30,6 @@
     $APP_allow_signup = true; // should registering into your app be allowed
     $APP_admin_from_address = "sascha.heimann@gmail.com";
     $APP_admin_to_address = 'sascha.heimann@gmail.com';
+    $APP_failedLogonCount = 3; // amount of failed logon attempts before the account will be disabled
+    $APP_lockOutMail = true;  // send an admin mail whe a user is locked out due too many login attempts
 ?>

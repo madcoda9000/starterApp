@@ -431,7 +431,7 @@ $(document).ready(function(){
         $.ajax({
             url: "api/login.php",
             type : "POST",
-            contentType : 'application/json',
+            contentType : 'application/json', 
             data : form_data,
             success : function(result){  
                 // check if user is disabled
@@ -454,9 +454,9 @@ $(document).ready(function(){
                     } 
                 }                      
             },
-            error: function(xhr, resp, text){
+            error: function(xhr, resp, text){                
                 // on error, tell the user login has failed & empty the input boxes
-                $('#response').html("<div class='alert alert-danger'>Login failed. Email or password is incorrect.</div>");
+                $('#response').html("<div class='alert alert-danger'>Login failed. " + xhr.responseJSON.message + "</div>");
                 login_form.find('input').val(''); 
             }
         });

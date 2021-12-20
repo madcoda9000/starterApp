@@ -32,6 +32,7 @@
                     echo "success";
                 } elseif($_GET['action']=='enable') {
                     $user->accState=1;
+                    $user->failedLogonCount=0;
                     $user->save();
                     echo "success";
                 }                

@@ -24,6 +24,7 @@ class User{
     public $totp_secret;
     public $totp_enabled;
     public $accState;
+    public $failedLogonCount;
  
     // constructor
     public function __construct(){
@@ -134,6 +135,7 @@ class User{
             $this->totp_secret = $find_user_by_mail->totp_secret;
             $this->totp_enabled = $find_user_by_mail->totp_enabled;
             $this->accState = $find_user_by_mail->accState;
+            $this->failedLogonCount = $find_user_by_mail->failedLogonCount;
     
             // return true because email exists in the database
             return true;
@@ -141,6 +143,19 @@ class User{
     
         // return false if email does not exist in the database
         return false;
+    }
+
+    // reset logon count
+    function resetFailedLogonCount() {
+        $edit_user = ORM::for_table('users')->find_one($this->id);
+        if($edit_user) {
+            $edit_user->failedLogonCount=0;
+            $edit_user->save();
+            return true;
+        }
+        else {
+            return false;
+        }
     }
  
     // update a user record
