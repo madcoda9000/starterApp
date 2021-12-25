@@ -97,5 +97,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - added mail class for sending mails
 - added check for admin notify on disabeling a user due to too many failed logins 
 - brute force feature complete
+- add loading indicator on user/group management page
+
+
 
 

@@ -95,7 +95,11 @@
                     </div>
                 </div>
             </div>
-			<div id="target-content">loading...</div>
+			<div id="target-content">
+                <div class="col-16 text-center">
+                <br><br><br>Loding data<br><img src="../assets/images/progress.gif" alt="loading..." width="200" height="150" /><br><br><br><br> 
+                </div>
+            </div>
             
 			<div class="clearfix">
                

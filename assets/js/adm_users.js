@@ -102,6 +102,7 @@ $(document).ready(function(){
    });
 
    // show home page
+   //TODO:Lost Session when click on home in admin page if mfa is activated for the user of the current session
    $(document).on('click', '#home', function(){
        window.location.href = "../index.php";
    });

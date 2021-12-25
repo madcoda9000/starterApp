@@ -22,7 +22,7 @@
             "name": "Launch Microsoft Edge and open the Edge DevTools",
             "request": "launch",
             "type": "vscode-edge-devtools.debug",
-            "url": "http://localhost/shpass" // Provide your project's url to finish configuring
+            "url": "http://example.local/" // Provide your project's url to finish configuring
         }
     ]
 }
