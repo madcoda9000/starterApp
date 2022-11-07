@@ -6,16 +6,16 @@
     date_default_timezone_set('Europe/Berlin');
 
     // Database variables
-    $DB_host = "192.168.2.234";
-    $DB_user = "shpass";
-    $DB_pass = "Diu1.SHPASS";
-    $DB_name = "shpass";
+    $DB_host = "YOUR_DB_IP";
+    $DB_user = "YOUR_DB_USER";
+    $DB_pass = "YOUR_DB_PASS";
+    $DB_name = "YOUR_DB_NAME";
 
     // mail variables
-    $MAIL_Server = "smtp.gmail.com";
+    $MAIL_Server = "YOUR_SMTP_SERVER";
     $MAIL_Port = "587";
-    $MAIL_User = "sascha.heimann@gmail.com";
-    $MAIL_Pass = "lfllzcjmtmungdxg";
+    $MAIL_User = "YOUR_SMTP_USERNAME";
+    $MAIL_Pass = "YOUR_SMTP_PASWD";
     $MAIL_Encryption = "PHPMailer::ENCRYPTION_STARTTLS"; //possible values are: PHPMailer::ENCRYPTION_STARTTLS (STARTTLS) or PHPMailer::ENCRYPTION_SMTPS (SSL)
     $MAIL_useSmtpAuth = true;
 
@@ -29,8 +29,8 @@
     $APP_title = "starterAPP";   // your application title
     $APP_title_description = "customize your starter app.";  // your application description
     $APP_allow_signup = true; // should registering into your app be allowed
-    $APP_admin_from_address = "sascha.heimann@gmail.com";
-    $APP_admin_to_address = 'sascha.heimann@gmail.com';
+    $APP_admin_from_address = "YOUR@FROM.ADDRESS";
+    $APP_admin_to_address = 'YOUR@TO.ADDRESS';
     $APP_failedLogonCount = 3; // amount of failed logon attempts before the account will be disabled
     $APP_lockOutMail = true;  // send an admin mail whe a user is locked out due too many login attempts
 ?>
